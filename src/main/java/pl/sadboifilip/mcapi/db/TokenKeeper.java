@@ -9,6 +9,8 @@ import java.util.UUID;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import java.util.Map.Entry;
+
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 
@@ -63,7 +65,11 @@ public class TokenKeeper implements Serializable {
     }
 
     public UUID getTokensPlayerId(UUID token) {
-        // this.tokens.
+        for (Entry<UUID, UUID> tokensPair : this.tokens.entrySet()) {
+            if (tokensPair.getValue().equals(token)) {
+                return tokensPair.getKey();
+            }
+        }
         return null;
     }
 

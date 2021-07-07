@@ -15,7 +15,7 @@ public enum UserRoles implements Role {
     OP_PLAYER, WHITELISTED_PLAYER, BANNED_PLAYER, NORMAL_PLAYER, NOT_EXISTING_PLAYER;
 
     public static UserRoles getUserRole(Context ctx) {
-        final String token = ctx.req.getHeader("Auth");
+        final String token = ctx.req.getHeader("Authorization").replace("Bearer ", "");
 
         if (token == null) {
             return UserRoles.NOT_EXISTING_PLAYER;
@@ -24,6 +24,10 @@ public enum UserRoles implements Role {
         final TokenKeeper tokenKeeper = TokenKeeper.getTokenKeeper();
 
         final UUID playerId = tokenKeeper.getTokensPlayerId(UUID.fromString(token));
+
+        if (playerId == null) {
+            return UserRoles.NOT_EXISTING_PLAYER;
+        }
         final OfflinePlayer player = Bukkit.getOfflinePlayer(playerId);
 
         if (player.isOp()) {
