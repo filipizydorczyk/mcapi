@@ -9,7 +9,7 @@
 
   <name>mcapi</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/filipizydorczyk/mcapi</url>
 
   <repositories>
     <!-- This adds the Spigot Maven repository to the build -->
