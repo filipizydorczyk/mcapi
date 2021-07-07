@@ -1,0 +1,4 @@
+main: pl.sadboifilip.mcapi
+name: Minecraft API
+description: Simple API for minecraft spigot servers to allow users some actions based on their server role.
+version: 1.0

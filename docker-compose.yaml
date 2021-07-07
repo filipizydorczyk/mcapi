@@ -1,0 +1,12 @@
+version: "3"
+services:
+    server:
+        image: nimmis/spigot:latest
+        ports:
+            - 25565:25565
+            - 7000:7000
+
+        environment:
+            - EULA=true
+        volumes:
+            - ./plugins:/minecraft/plugins
