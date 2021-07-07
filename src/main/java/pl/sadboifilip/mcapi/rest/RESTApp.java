@@ -1,6 +1,7 @@
 package pl.sadboifilip.mcapi.rest;
 
 import io.javalin.Javalin;
+import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class RESTApp {
     private static Javalin app = null;
@@ -9,7 +10,7 @@ public class RESTApp {
 
         if (RESTApp.app == null) {
 
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             Thread.currentThread().setContextClassLoader(RESTApp.class.getClassLoader());
             RESTApp.app = Javalin.create().start(7000);
             Thread.currentThread().setContextClassLoader(classLoader);
@@ -23,8 +24,14 @@ public class RESTApp {
                 }
             });
 
-            app.get("/", context -> context.result("Hi"),
-                    UserRoles.createPermissions(UserRoles.OP_PLAYER, UserRoles.BANNED_PLAYER));
+            app.routes(() -> {
+                path("/api/v1/", () -> {
+                    path("players", () -> {
+                        get("logged", context -> context.result("Hi"),
+                                UserRoles.createPermissions(UserRoles.OP_PLAYER, UserRoles.BANNED_PLAYER));
+                    });
+                });
+            });
 
         }
 
