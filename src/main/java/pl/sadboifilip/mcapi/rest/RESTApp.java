@@ -1,6 +1,8 @@
 package pl.sadboifilip.mcapi.rest;
 
 import io.javalin.Javalin;
+import pl.sadboifilip.mcapi.rest.endpoints.PlayersEndpointGroup;
+
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class RESTApp {
@@ -26,10 +28,7 @@ public class RESTApp {
 
             app.routes(() -> {
                 path("/api/v1/", () -> {
-                    path("players", () -> {
-                        get("logged", context -> context.result("Hi"),
-                                UserRoles.createPermissions(UserRoles.OP_PLAYER, UserRoles.BANNED_PLAYER));
-                    });
+                    path("players", new PlayersEndpointGroup());
                 });
             });
 
