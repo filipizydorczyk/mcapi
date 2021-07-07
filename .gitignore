@@ -32,3 +32,4 @@ build/
 ### Project artifacta ###
 
 plugins/
+dependency-reduced-pom.xml
