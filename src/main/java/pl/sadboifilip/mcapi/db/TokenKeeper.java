@@ -19,14 +19,19 @@ public class TokenKeeper implements Serializable {
     private static transient final long serialVersionUID = 1L;
     private final HashMap<UUID, UUID> tokens = new HashMap<>();
 
-    public static TokenKeeper loadData(String filePath) {
+    public static TokenKeeper getTokenKeeper() {
         try {
             BukkitObjectInputStream in = new BukkitObjectInputStream(
-                    new GZIPInputStream(new FileInputStream(filePath)));
+                    new GZIPInputStream(new FileInputStream(TokenKeeper.TOKEN_KEEPER_FILE)));
 
-            TokenKeeper data = (TokenKeeper) in.readObject();
+            TokenKeeper tokenKeeper = (TokenKeeper) in.readObject();
             in.close();
-            return data;
+
+            if (tokenKeeper == null) {
+                tokenKeeper = new TokenKeeper();
+            }
+
+            return tokenKeeper;
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
             return null;

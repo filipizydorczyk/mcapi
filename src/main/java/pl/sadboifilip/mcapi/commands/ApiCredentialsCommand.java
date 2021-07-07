@@ -15,11 +15,7 @@ public class ApiCredentialsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             final Player player = (Player) sender;
-            TokenKeeper tokenKeeper = TokenKeeper.loadData(TokenKeeper.TOKEN_KEEPER_FILE);
-
-            if (tokenKeeper == null) {
-                tokenKeeper = new TokenKeeper();
-            }
+            TokenKeeper tokenKeeper = TokenKeeper.getTokenKeeper();
 
             UUID apiToken = tokenKeeper.getPlayerApiToken(player.getUniqueId());
             tokenKeeper.saveData(TokenKeeper.TOKEN_KEEPER_FILE);
