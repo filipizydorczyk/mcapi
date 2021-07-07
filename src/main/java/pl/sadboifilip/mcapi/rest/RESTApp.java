@@ -1,8 +1,5 @@
 package pl.sadboifilip.mcapi.rest;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import io.javalin.Javalin;
 
 public class RESTApp {
@@ -12,7 +9,11 @@ public class RESTApp {
 
         if (RESTApp.app == null) {
 
-            RESTApp.app = Javalin.create();
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            Thread.currentThread().setContextClassLoader(RESTApp.class.getClassLoader());
+            RESTApp.app = Javalin.create().start(7000);
+            Thread.currentThread().setContextClassLoader(classLoader);
+
             RESTApp.app.config.accessManager((handler, ctx, permittedRoles) -> {
                 final UserRoles userRole = UserRoles.getUserRole(ctx);
                 if (permittedRoles.contains(userRole)) {
@@ -22,7 +23,8 @@ public class RESTApp {
                 }
             });
 
-            app.get("/", context -> context.result("Hi"));
+            app.get("/", context -> context.result("Hi"),
+                    UserRoles.createPermissions(UserRoles.OP_PLAYER, UserRoles.BANNED_PLAYER));
 
         }
 

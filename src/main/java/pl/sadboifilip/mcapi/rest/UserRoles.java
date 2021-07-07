@@ -1,5 +1,7 @@
 package pl.sadboifilip.mcapi.rest;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -14,14 +16,14 @@ public enum UserRoles implements Role {
 
     public static UserRoles getUserRole(Context ctx) {
         final String token = ctx.req.getHeader("Auth");
-        final TokenKeeper tokenKeeper = TokenKeeper.getTokenKeeper();
 
-        final UUID playerId = tokenKeeper.getTokensPlayerId(UUID.fromString(token));
-
-        if (playerId == null) {
+        if (token == null) {
             return UserRoles.NOT_EXISTING_PLAYER;
         }
 
+        final TokenKeeper tokenKeeper = TokenKeeper.getTokenKeeper();
+
+        final UUID playerId = tokenKeeper.getTokensPlayerId(UUID.fromString(token));
         final OfflinePlayer player = Bukkit.getOfflinePlayer(playerId);
 
         if (player.isOp()) {
@@ -37,5 +39,15 @@ public enum UserRoles implements Role {
         }
 
         return UserRoles.NORMAL_PLAYER;
+    }
+
+    public static Set<Role> createPermissions(UserRoles... roles) {
+        final HashSet<Role> permissions = new HashSet<>();
+
+        for (UserRoles role : roles) {
+            permissions.add(role);
+        }
+
+        return permissions;
     }
 }
