@@ -15,11 +15,13 @@ public enum UserRoles implements Role {
     OP_PLAYER, WHITELISTED_PLAYER, BANNED_PLAYER, NORMAL_PLAYER, NOT_EXISTING_PLAYER;
 
     public static UserRoles getUserRole(Context ctx) {
-        final String token = ctx.req.getHeader("Authorization").replace("Bearer ", "");
+        String token = ctx.req.getHeader("Authorization");
 
         if (token == null) {
             return UserRoles.NOT_EXISTING_PLAYER;
         }
+
+        token = token.replace("Bearer ", "");
 
         final TokenKeeper tokenKeeper = TokenKeeper.getTokenKeeper();
 
