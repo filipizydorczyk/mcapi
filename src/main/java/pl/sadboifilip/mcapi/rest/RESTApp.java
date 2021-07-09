@@ -6,7 +6,7 @@ import pl.sadboifilip.mcapi.rest.endpoints.PlayersEndpointGroup;
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class RESTApp {
-    private static Javalin app = null;
+    private static Javalin app;
 
     public static Javalin getApp() {
 
