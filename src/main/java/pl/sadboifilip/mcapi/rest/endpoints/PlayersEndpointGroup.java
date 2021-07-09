@@ -15,7 +15,7 @@ public class PlayersEndpointGroup implements EndpointGroup {
     @Override
     public void addEndpoints() {
         get("logged", context -> {
-            final List<PlayerResponse> list = App.getInstance().getServer().getOnlinePlayers().stream()
+            final List<PlayerResponse> list = App.getPlugin(App.class).getServer().getOnlinePlayers().stream()
                     .map(PlayerResponse::new).collect(Collectors.toList());
             context.json(list);
         }, UserRoles.createPermissions(UserRoles.OP_PLAYER));

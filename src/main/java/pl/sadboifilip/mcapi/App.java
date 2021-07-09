@@ -9,14 +9,6 @@ import pl.sadboifilip.mcapi.rest.RESTApp;
 public class App extends JavaPlugin {
 
     private Javalin app = null;
-    private static App instance = null;
-
-    public App() {
-        super();
-        if (App.instance == null) {
-            App.instance = this;
-        }
-    }
 
     @Override
     public void onEnable() {
@@ -32,7 +24,4 @@ public class App extends JavaPlugin {
         app.stop();
     }
 
-    public static App getInstance() {
-        return App.instance;
-    }
 }
