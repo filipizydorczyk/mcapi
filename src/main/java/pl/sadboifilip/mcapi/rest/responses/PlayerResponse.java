@@ -1,6 +1,5 @@
 package pl.sadboifilip.mcapi.rest.responses;
 
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class PlayerResponse {
