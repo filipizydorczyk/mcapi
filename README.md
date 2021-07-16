@@ -1,3 +1,5 @@
+![](https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/img/header/logo.png)
+
 # Getting started
 
 ```sh
