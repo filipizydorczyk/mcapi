@@ -27,6 +27,26 @@ public class WhitelistEndpointGroup extends BaseEndpointGroup {
             context.json(list);
         }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
 
+        get("/status", context -> {
+            if (this.app.getServer().hasWhitelist()) {
+                context.json(new DefaultResponse("Whitelist is up."));
+            } else {
+                context.json(new DefaultResponse("Whitelist is down."));
+            }
+        }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
+
+        post("/status", context -> {
+            this.app.getServer().setWhitelist(true);
+
+            context.json(new DefaultResponse("Whitelist is now enabled."));
+        }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
+
+        delete("/status", context -> {
+            this.app.getServer().setWhitelist(false);
+
+            context.json(new DefaultResponse("Whitelist is now disabled."));
+        }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
+
         post("/:id", context -> {
             final UUID userId = UUID.fromString(context.pathParam("id"));
 
