@@ -2,6 +2,7 @@ package pl.sadboifilip.mcapi.rest;
 
 import io.javalin.Javalin;
 import pl.sadboifilip.mcapi.rest.endpoints.PlayersEndpointGroup;
+import pl.sadboifilip.mcapi.rest.endpoints.WhitelistEndpointGroup;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -29,6 +30,7 @@ public class RESTApp {
             app.routes(() -> {
                 path("/api/v1/", () -> {
                     path("players", new PlayersEndpointGroup());
+                    path("whitelist", new WhitelistEndpointGroup());
                 });
             });
 

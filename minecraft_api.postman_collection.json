@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "58f1ead7-8dfd-416c-9c25-2a50c08e9181",
+		"name": "minecraft_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get logged in players",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/v1/players/logged",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"v1",
+						"players",
+						"logged"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get whitelisted players",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/v1/whitelist/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"v1",
+						"whitelist",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Kick player",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "94a7b26c-7f4c-44a1-8c8b-b5db49a824e6",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/v1/players/f788f596-05f7-4d3d-a4cf-1b000843b02d/kick",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"v1",
+						"players",
+						"f788f596-05f7-4d3d-a4cf-1b000843b02d",
+						"kick"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

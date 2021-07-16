@@ -1,8 +1,5 @@
 package pl.sadboifilip.mcapi.rest.endpoints;
 
-import io.javalin.apibuilder.EndpointGroup;
-import pl.sadboifilip.mcapi.App;
-import pl.sadboifilip.mcapi.ApplicationConfig;
 import pl.sadboifilip.mcapi.rest.UserRoles;
 import pl.sadboifilip.mcapi.rest.responses.PlayerResponse;
 
@@ -13,22 +10,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.bukkit.scheduler.BukkitScheduler;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class PlayersEndpointGroup implements EndpointGroup {
-
-    private App app;
+public class PlayersEndpointGroup extends BaseEndpointGroup {
 
     public PlayersEndpointGroup() {
         super();
-        final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-                ApplicationConfig.class);
-
-        try {
-            this.app = context.getBean(App.class);
-        } finally {
-            context.close();
-        }
     }
 
     @Override
@@ -39,17 +25,13 @@ public class PlayersEndpointGroup implements EndpointGroup {
             context.json(list);
         }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
 
-        get(":id/kick", context -> {
-            System.out.println(context.pathParam("id"));
+        post(":id/kick", context -> {
             final UUID userId = UUID.fromString(context.pathParam("id"));
 
             try {
                 final BukkitScheduler scheduler = this.app.getServer().getScheduler();
-                scheduler.scheduleSyncDelayedTask(this.app, new Runnable() {
-                    @Override
-                    public void run() {
-                        app.getServer().getPlayer(userId).kickPlayer("Bye!");
-                    }
+                scheduler.scheduleSyncDelayedTask(this.app, () -> {
+                    app.getServer().getPlayer(userId).kickPlayer("Bye!");
                 }, 0L);
 
             } catch (Exception e) {

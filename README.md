@@ -20,7 +20,13 @@ Login to server (It should be available on `localhost` on port `25565`) and run 
 
 At this point ur plugin should be up on test server.
 
-# Why Docker
+# Endpoints
+
+To test endpoints in postman u can import collection from file [`minecraft_api.postman_collection.json`](./minecraft_api.postman_collection.json)
+
+# Stack
+
+## Why Docker
 
 Docker is used for testing pourposes. If you dont want to use it you can test it on your server.
 To make container make sure port `25565` is not taken and type `docker-compose up -d`.
@@ -34,7 +40,7 @@ To test plugin you can restart docker after plugin paste or type `/reload` on se
 docker exec -it [containerid] mc_send op [playername]
 ```
 
-# Why Makefile
+## Why Makefile
 
 Makefile is just here to automate coping generated jar to `plugins`. Obviously on windows it won't work unless you use **wsl**.
 
