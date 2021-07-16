@@ -1,6 +1,7 @@
 package pl.sadboifilip.mcapi.rest.endpoints;
 
 import pl.sadboifilip.mcapi.rest.UserRoles;
+import pl.sadboifilip.mcapi.rest.responses.DefaultResponse;
 import pl.sadboifilip.mcapi.rest.responses.PlayerResponse;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
@@ -35,10 +36,10 @@ public class PlayersEndpointGroup extends BaseEndpointGroup {
                 }, 0L);
 
             } catch (Exception e) {
-                context.result(e.getMessage());
+                context.json(new DefaultResponse(true, e.getMessage()));
             }
 
-            context.result("true");
+            context.json(new DefaultResponse("Player kicked."));
 
         }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
 

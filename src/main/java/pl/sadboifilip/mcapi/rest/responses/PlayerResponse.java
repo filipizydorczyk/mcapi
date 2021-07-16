@@ -13,10 +13,6 @@ public class PlayerResponse {
         this.name = player.getName();
     }
 
-    public PlayerResponse(OfflinePlayer player) {
-        this((Player) player);
-    }
-
     public String getName() {
         return name;
     }
