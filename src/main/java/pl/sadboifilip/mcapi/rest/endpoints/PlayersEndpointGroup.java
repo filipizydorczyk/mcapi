@@ -51,10 +51,9 @@ public class PlayersEndpointGroup extends BaseEndpointGroup {
 
             try {
                 final OfflinePlayer pl = this.app.getServer().getOfflinePlayer(userId);
-
                 Bukkit.getBanList(BanList.Type.NAME).addBan(pl.getName(), "Banned from API.", null, null);
-
                 context.json(new DefaultResponse("Player banned."));
+
             } catch (Exception e) {
                 context.json(new DefaultResponse(e.getMessage()));
             }
@@ -65,10 +64,9 @@ public class PlayersEndpointGroup extends BaseEndpointGroup {
 
             try {
                 final OfflinePlayer pl = this.app.getServer().getOfflinePlayer(userId);
-
                 Bukkit.getBanList(BanList.Type.NAME).pardon(pl.getName());
-
                 context.json(new DefaultResponse("Player unbanned."));
+
             } catch (Exception e) {
                 context.json(new DefaultResponse(e.getMessage()));
             }
