@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.BanList;
 import org.bukkit.scheduler.BukkitScheduler;
 
 public class PlayersEndpointGroup extends BaseEndpointGroup {
@@ -41,6 +44,34 @@ public class PlayersEndpointGroup extends BaseEndpointGroup {
 
             context.json(new DefaultResponse("Player kicked."));
 
+        }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
+
+        post(":id/ban", context -> {
+            final UUID userId = UUID.fromString(context.pathParam("id"));
+
+            try {
+                final OfflinePlayer pl = this.app.getServer().getOfflinePlayer(userId);
+
+                Bukkit.getBanList(BanList.Type.NAME).addBan(pl.getName(), "Banned from API.", null, null);
+
+                context.json(new DefaultResponse("Player banned."));
+            } catch (Exception e) {
+                context.json(new DefaultResponse(e.getMessage()));
+            }
+        }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
+
+        delete(":id/ban", context -> {
+            final UUID userId = UUID.fromString(context.pathParam("id"));
+
+            try {
+                final OfflinePlayer pl = this.app.getServer().getOfflinePlayer(userId);
+
+                Bukkit.getBanList(BanList.Type.NAME).pardon(pl.getName());
+
+                context.json(new DefaultResponse("Player unbanned."));
+            } catch (Exception e) {
+                context.json(new DefaultResponse(e.getMessage()));
+            }
         }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
 
     }
