@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.bukkit.entity.Player;
-
 public class WhitelistEndpointGroup extends BaseEndpointGroup {
 
     public WhitelistEndpointGroup() {
@@ -22,8 +20,7 @@ public class WhitelistEndpointGroup extends BaseEndpointGroup {
     public void addEndpoints() {
         get("/", context -> {
             final List<PlayerResponse> list = this.app.getServer().getWhitelistedPlayers().stream()
-                    .filter(pl -> pl instanceof Player).map(pl -> new PlayerResponse((Player) pl))
-                    .collect(Collectors.toList());
+                    .map(pl -> new PlayerResponse(pl)).collect(Collectors.toList());
             context.json(list);
         }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
 
