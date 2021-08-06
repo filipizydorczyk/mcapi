@@ -1,6 +1,7 @@
 package pl.sadboifilip.mcapi.rest;
 
 import io.javalin.Javalin;
+import io.javalin.http.sse.SseClient;
 import pl.sadboifilip.mcapi.rest.endpoints.LogsEndpointGroup;
 import pl.sadboifilip.mcapi.rest.endpoints.PlayersEndpointGroup;
 import pl.sadboifilip.mcapi.rest.endpoints.WhitelistEndpointGroup;
@@ -36,8 +37,14 @@ public class RESTApp {
                 });
             });
 
+            app.sse("/events", client -> {
+                client.sendEvent("connected", "Hello, SSE");
+                client.onClose(() -> System.out.println("Client disconnected"));
+            }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
+
         }
 
         return RESTApp.app;
     }
+
 }
