@@ -8,6 +8,16 @@
 		{
 			"name": "Get logged in players",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "94a7b26c-7f4c-44a1-8c8b-b5db49a824e6",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -270,6 +280,38 @@
 						"players",
 						"f788f596-05f7-4d3d-a4cf-1b000843b02d",
 						"ban"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get logs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "94a7b26c-7f4c-44a1-8c8b-b5db49a824e6",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/api/v1/players/logs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"v1",
+						"players",
+						"logs"
 					]
 				}
 			},
