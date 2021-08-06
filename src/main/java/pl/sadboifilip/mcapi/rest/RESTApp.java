@@ -1,12 +1,14 @@
 package pl.sadboifilip.mcapi.rest;
 
 import io.javalin.Javalin;
-import io.javalin.http.sse.SseClient;
+import pl.sadboifilip.mcapi.ApplicationConfig;
 import pl.sadboifilip.mcapi.rest.endpoints.LogsEndpointGroup;
 import pl.sadboifilip.mcapi.rest.endpoints.PlayersEndpointGroup;
 import pl.sadboifilip.mcapi.rest.endpoints.WhitelistEndpointGroup;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class RESTApp {
     private static Javalin app;
@@ -38,8 +40,16 @@ public class RESTApp {
             });
 
             app.sse("/events", client -> {
-                client.sendEvent("connected", "Hello, SSE");
-                client.onClose(() -> System.out.println("Client disconnected"));
+                final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                        ApplicationConfig.class);
+
+                try {
+                    final SseClientService service = context.getBean(SseClientService.class);
+                    service.registerClient(client);
+                    client.onClose(() -> service.unregisterClient(client));
+                } finally {
+                    context.close();
+                }
             }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
 
         }

@@ -22,9 +22,11 @@ Login to server (It should be available on `localhost` on port `25565`) and run 
 
 At this point ur plugin should be up on test server.
 
-# Endpoints
+# Endpoints and testing
 
 To test endpoints in postman u can import collection from file [`minecraft_api.postman_collection.json`](./minecraft_api.postman_collection.json)
+
+This app also user **Server-Sent Events (SSE)** to send events. U can register for events on `/events` endpoint. To test it u can run `./sse-client-test.sh` (only on linux or wsl). It will listen for upcoming events. U need to provide op player token. To do so define variable `TOKEN=token ./sse-client-test.sh` u can also define port this way `PORT=7000 ./sse-client-test.sh`.
 
 # Stack
 

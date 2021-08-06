@@ -5,6 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import io.javalin.Javalin;
 import pl.sadboifilip.mcapi.commands.ApiCredentialsCommand;
+import pl.sadboifilip.mcapi.events.PlayerJoinListener;
 
 public class App extends JavaPlugin {
 
@@ -21,6 +22,7 @@ public class App extends JavaPlugin {
         }
 
         this.getCommand("apitoken").setExecutor(new ApiCredentialsCommand());
+        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
 
         getLogger().info("REST API ENABLED!");
     }
