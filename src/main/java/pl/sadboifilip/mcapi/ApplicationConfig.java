@@ -12,6 +12,8 @@ import pl.sadboifilip.mcapi.rest.SseClientService;
 @ComponentScan("pl.sadboifilip.mcapi")
 public class ApplicationConfig {
 
+    private static Javalin restApp;
+
     @Bean
     public App pluginInstance() {
         return App.getPlugin(App.class);
@@ -19,7 +21,10 @@ public class ApplicationConfig {
 
     @Bean
     public Javalin getJavalinApp() {
-        return new RESTApp();
+        if (ApplicationConfig.restApp == null) {
+            ApplicationConfig.restApp = new RESTApp();
+        }
+        return ApplicationConfig.restApp;
     }
 
     @Bean
