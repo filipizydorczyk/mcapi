@@ -6,6 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import io.javalin.Javalin;
 import pl.sadboifilip.mcapi.commands.ApiCredentialsCommand;
 import pl.sadboifilip.mcapi.commands.ApiStartCommand;
+import pl.sadboifilip.mcapi.commands.ApiStopCommand;
 import pl.sadboifilip.mcapi.events.PlayerJoinListener;
 
 public class App extends JavaPlugin {
@@ -14,10 +15,9 @@ public class App extends JavaPlugin {
     public void onEnable() {
         this.getCommand("mcapi-token").setExecutor(new ApiCredentialsCommand());
         this.getCommand("mcapi-start").setExecutor(new ApiStartCommand());
+        this.getCommand("mcapi-stop").setExecutor(new ApiStopCommand());
 
         this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
-
-        // getLogger().info("REST API ENABLED!");
     }
 
     @Override

@@ -10,3 +10,6 @@ commands:
     "mcapi-start":
         description: Starts rest server on provided port. If port was not provided it will take 7000 by default
         usage: /mcapi-start 7000
+    "mcapi-stop":
+        description: Stops started server
+        usage: /mcapi-stop
