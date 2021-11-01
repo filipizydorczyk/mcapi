@@ -1,6 +1,26 @@
-![](https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/img/header/logo.png)
+![](./extras/logo.png)
 
-# Getting started
+This is simple spigot plugin that expose some server data through **REST API** so taht u can make tools to manage your server. All you have to do is downlad latest release `.jar` and paste it to server plugin directory. Once your plugin is on server enabled you can start rest app with
+
+```minecratf
+/mcapi-start 7000
+```
+
+It will satrt app on port **7000**. You can provide every port you want. If port is not provided it will take **7000** by default. When server is being stopped or reloaded app will stop automaticly and you will have to enable it manulaly. You can also stop it with command.
+
+```minecratf
+/mcapi-stop
+```
+
+To make any request you have to authorize your user. To do this you need to generate token on minecraft server with
+
+```minecratf
+/mcapi-token
+```
+
+Then you need to copy this token and use it in **Authorion header** as `Bearer Token`. To browse available enppoints import [`minecraft_api.postman_collection.json`](./extras/minecraft_api.postman_collection.json) to postman. Note that this is side project that I develop when I am bored so ammount of endpoints is limited to total basics. You can see example project taht uses this api in my other [repo](https://github.com/filipizydorczyk/minecraft-spigot-manager) (as long as I have completed this project xD).
+
+# 👩🏽‍🔧 Development
 
 ```sh
 make init
@@ -22,13 +42,11 @@ Login to server (It should be available on `localhost` on port `25565`) and run 
 
 At this point ur plugin should be up on test server.
 
-# Endpoints and testing
+## Endpoints and testing
 
-To test endpoints in postman u can import collection from file [`minecraft_api.postman_collection.json`](./minecraft_api.postman_collection.json)
+To test endpoints in postman u can import collection from file [`minecraft_api.postman_collection.json`](./extras/minecraft_api.postman_collection.json)
 
 This app also user **Server-Sent Events (SSE)** to send events and print them. U can register for events on `/events` endpoint. To test it u can run `./sse-client-test.sh` (only on linux or wsl). It will listen for upcoming events. U need to provide op player token. To do so define variable `TOKEN=token ./sse-client-test.sh` u can also define port this way `PORT=7000 ./sse-client-test.sh`.
-
-# Stack
 
 ## Why Docker
 

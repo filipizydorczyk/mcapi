@@ -1,7 +1,7 @@
 main: pl.sadboifilip.mcapi.App
 name: MinecraftAPI
 description: Simple API for minecraft spigot servers to allow users some actions based on their server role.
-version: 1.0
+version: 1.1
 
 commands:
     "mcapi-token":
