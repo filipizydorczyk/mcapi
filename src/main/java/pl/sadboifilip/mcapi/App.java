@@ -21,7 +21,7 @@ public class App extends JavaPlugin {
             context.close();
         }
 
-        this.getCommand("apitoken").setExecutor(new ApiCredentialsCommand());
+        this.getCommand("mcapi-token").setExecutor(new ApiCredentialsCommand());
         this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
 
         getLogger().info("REST API ENABLED!");

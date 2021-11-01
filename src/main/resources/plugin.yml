@@ -4,6 +4,6 @@ description: Simple API for minecraft spigot servers to allow users some actions
 version: 1.0
 
 commands:
-    apitoken:
+    "mcapi-token":
         description: Get your token for rest api requests
-        usage: /apitoken
+        usage: /mcapi-token
