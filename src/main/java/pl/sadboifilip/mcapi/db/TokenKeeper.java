@@ -1,6 +1,7 @@
 package pl.sadboifilip.mcapi.db;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -23,17 +24,15 @@ public class TokenKeeper implements Serializable {
 
     public static TokenKeeper getTokenKeeper() {
         try {
-            BukkitObjectInputStream in = new BukkitObjectInputStream(
+            final BukkitObjectInputStream in = new BukkitObjectInputStream(
                     new GZIPInputStream(new FileInputStream(TokenKeeper.TOKEN_KEEPER_FILE)));
 
-            TokenKeeper tokenKeeper = (TokenKeeper) in.readObject();
+            final TokenKeeper tokenKeeper = (TokenKeeper) in.readObject();
             in.close();
 
-            if (tokenKeeper == null) {
-                tokenKeeper = new TokenKeeper();
-            }
-
             return tokenKeeper;
+        } catch (FileNotFoundException e) {
+            return new TokenKeeper();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
             return null;
