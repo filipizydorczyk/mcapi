@@ -12,12 +12,15 @@ public class ApiStartCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        // final String port = args[0] != null ? args[0] : "7000";
+        int port = 7000;
+        if (args.length > 0) {
+            port = Integer.parseInt(args[0]);
+        }
 
         final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
                 ApplicationConfig.class);
         try {
-            context.getBean(Javalin.class).start(7000);
+            context.getBean(Javalin.class).start(port);
         } finally {
             context.close();
         }
