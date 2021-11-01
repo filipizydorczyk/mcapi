@@ -5,31 +5,30 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import io.javalin.Javalin;
 import pl.sadboifilip.mcapi.commands.ApiCredentialsCommand;
+import pl.sadboifilip.mcapi.commands.ApiStartCommand;
 import pl.sadboifilip.mcapi.events.PlayerJoinListener;
 
 public class App extends JavaPlugin {
 
-    private Javalin app;
-
     @Override
     public void onEnable() {
-        final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-                ApplicationConfig.class);
-        try {
-            this.app = context.getBean(Javalin.class);
-        } finally {
-            context.close();
-        }
-
         this.getCommand("mcapi-token").setExecutor(new ApiCredentialsCommand());
+        this.getCommand("mcapi-start").setExecutor(new ApiStartCommand());
+
         this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
 
-        getLogger().info("REST API ENABLED!");
+        // getLogger().info("REST API ENABLED!");
     }
 
     @Override
     public void onDisable() {
-        app.stop();
+        final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                ApplicationConfig.class);
+        try {
+            context.getBean(Javalin.class).stop();
+        } finally {
+            context.close();
+        }
     }
 
 }

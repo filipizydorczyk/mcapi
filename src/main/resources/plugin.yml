@@ -7,3 +7,6 @@ commands:
     "mcapi-token":
         description: Get your token for rest api requests
         usage: /mcapi-token
+    "mcapi-start":
+        description: Starts rest server on provided port. If port was not provided it will take 7000 by default
+        usage: /mcapi-start 7000

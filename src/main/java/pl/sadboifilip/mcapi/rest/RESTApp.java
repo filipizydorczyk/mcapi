@@ -10,51 +10,45 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class RESTApp {
-    private static Javalin app;
+public class RESTApp extends Javalin {
 
-    public static Javalin getApp() {
+    @Override
+    public Javalin start(int port) {
+        final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(RESTApp.class.getClassLoader());
+        super.start(port);
+        Thread.currentThread().setContextClassLoader(classLoader);
 
-        if (RESTApp.app == null) {
+        this.config.accessManager((handler, ctx, permittedRoles) -> {
+            final UserRoles userRole = UserRoles.getUserRole(ctx);
+            if (permittedRoles.contains(userRole)) {
+                handler.handle(ctx);
+            } else {
+                ctx.status(401).result("Unauthorized");
+            }
+        });
 
-            final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            Thread.currentThread().setContextClassLoader(RESTApp.class.getClassLoader());
-            RESTApp.app = Javalin.create().start(7000);
-            Thread.currentThread().setContextClassLoader(classLoader);
-
-            RESTApp.app.config.accessManager((handler, ctx, permittedRoles) -> {
-                final UserRoles userRole = UserRoles.getUserRole(ctx);
-                if (permittedRoles.contains(userRole)) {
-                    handler.handle(ctx);
-                } else {
-                    ctx.status(401).result("Unauthorized");
-                }
+        this.routes(() -> {
+            path("/api/v1/", () -> {
+                path("players", new PlayersEndpointGroup());
+                path("whitelist", new WhitelistEndpointGroup());
+                path("logs", new LogsEndpointGroup());
             });
+        });
 
-            app.routes(() -> {
-                path("/api/v1/", () -> {
-                    path("players", new PlayersEndpointGroup());
-                    path("whitelist", new WhitelistEndpointGroup());
-                    path("logs", new LogsEndpointGroup());
-                });
-            });
+        this.sse("/events", client -> {
+            final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                    ApplicationConfig.class);
 
-            app.sse("/events", client -> {
-                final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-                        ApplicationConfig.class);
-
-                try {
-                    final SseClientService service = context.getBean(SseClientService.class);
-                    service.registerClient(client);
-                    client.onClose(() -> service.unregisterClient(client));
-                } finally {
-                    context.close();
-                }
-            }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
-
-        }
-
-        return RESTApp.app;
+            try {
+                final SseClientService service = context.getBean(SseClientService.class);
+                service.registerClient(client);
+                client.onClose(() -> service.unregisterClient(client));
+            } finally {
+                context.close();
+            }
+        }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
+        return this;
     }
 
 }

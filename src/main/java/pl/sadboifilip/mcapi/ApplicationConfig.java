@@ -19,7 +19,7 @@ public class ApplicationConfig {
 
     @Bean
     public Javalin getJavalinApp() {
-        return RESTApp.getApp();
+        return new RESTApp();
     }
 
     @Bean
