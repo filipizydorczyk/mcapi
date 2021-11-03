@@ -50,13 +50,13 @@ This app also uses **Server-Sent Events (SSE)** to send events. U can register f
 
 ## Linting
 
-I added config file fot java [checkstyle](https://checkstyle.sourceforge.io/) `linter.xml`. It is slightly changed [google config file](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml). To check project with rules run
+I added config file for java [checkstyle](https://checkstyle.sourceforge.io/) - `linter.xml`. It is slightly changed [google config file](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml). To check project with these rules run
 
 ```sh
 checkstyle -c ./linter.xml ./**/*.java
 ```
 
-The only diffence between google config and this is that javadoc comments are not required and Indentation is changed from 2 to 4.
+The only diffence between google config and this one is that javadoc comments are not required and Indentation is changed from 2 to 4.
 
 ## Why Docker
 
