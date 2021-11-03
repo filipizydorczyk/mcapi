@@ -48,6 +48,16 @@ To test endpoints in postman u can import collection from file [`minecraft_api.p
 
 This app also uses **Server-Sent Events (SSE)** to send events. U can register for it on `/events` endpoint. To test just can run `./sse-client-test.sh` (only on linux or wsl). It will listen for upcoming events and print them. U need to provide op player token to access it. To do so define variable `TOKEN=token ./sse-client-test.sh` u can also define port this way `PORT=7000 ./sse-client-test.sh`.
 
+## Linting
+
+I added config file fot java [checkstyle](https://checkstyle.sourceforge.io/) `linter.xml`. It is slightly changed [google config file](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml). To check project with rules run
+
+```sh
+checkstyle -c ./linter.xml ./**/*.java
+```
+
+The only diffence between google config and this is that javadoc comments are not required and Indentation is changed from 2 to 4.
+
 ## Why Docker
 
 Docker is used for testing pourposes. If you dont want to use it you can test it on your server.
