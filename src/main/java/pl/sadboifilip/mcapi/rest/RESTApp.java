@@ -36,8 +36,8 @@ public class RESTApp extends Javalin {
         });
 
         this.sse("/events", client -> {
-            final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-                    ApplicationConfig.class);
+            final AnnotationConfigApplicationContext context =
+                    new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
             try {
                 final SseClientService service = context.getBean(SseClientService.class);

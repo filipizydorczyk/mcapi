@@ -24,8 +24,8 @@ public class PlayersEndpointGroup extends BaseEndpointGroup {
     @Override
     public void addEndpoints() {
         get("logged", context -> {
-            final List<PlayerResponse> list = this.app.getServer().getOnlinePlayers().stream().map(PlayerResponse::new)
-                    .collect(Collectors.toList());
+            final List<PlayerResponse> list = this.app.getServer().getOnlinePlayers().stream()
+                    .map(PlayerResponse::new).collect(Collectors.toList());
             context.json(list);
         }, UserRoles.createPermissions(UserRoles.OP_PLAYER));
 
@@ -51,7 +51,8 @@ public class PlayersEndpointGroup extends BaseEndpointGroup {
 
             try {
                 final OfflinePlayer pl = this.app.getServer().getOfflinePlayer(userId);
-                Bukkit.getBanList(BanList.Type.NAME).addBan(pl.getName(), "Banned from API.", null, null);
+                Bukkit.getBanList(BanList.Type.NAME).addBan(pl.getName(), "Banned from API.", null,
+                        null);
                 context.json(new DefaultResponse("Player banned."));
 
             } catch (Exception e) {

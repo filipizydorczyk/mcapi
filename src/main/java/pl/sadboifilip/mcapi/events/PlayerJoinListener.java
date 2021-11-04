@@ -10,12 +10,13 @@ import pl.sadboifilip.mcapi.rest.SseClientService;
 public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent evt) {
-        final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-                ApplicationConfig.class);
+        final AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
         try {
             final SseClientService service = context.getBean(SseClientService.class);
-            service.sendEventToClients(SseClientService.PLAYER_LOGGED_IN, evt.getPlayer().getName());
+            service.sendEventToClients(SseClientService.PLAYER_LOGGED_IN,
+                    evt.getPlayer().getName());
         } finally {
             context.close();
         }
