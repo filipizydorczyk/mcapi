@@ -1,9 +1,8 @@
 package pl.sadboifilip.mcapi.rest;
 
+import io.javalin.http.sse.SseClient;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.javalin.http.sse.SseClient;
 
 public class SseClientService {
 

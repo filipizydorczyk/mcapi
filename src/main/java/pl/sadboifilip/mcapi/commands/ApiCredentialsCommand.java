@@ -1,12 +1,10 @@
 package pl.sadboifilip.mcapi.commands;
 
 import java.util.UUID;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import pl.sadboifilip.mcapi.db.TokenKeeper;
 
 public class ApiCredentialsCommand implements CommandExecutor {

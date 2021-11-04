@@ -1,9 +1,8 @@
 package pl.sadboifilip.mcapi;
 
+import io.javalin.Javalin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import io.javalin.Javalin;
 import pl.sadboifilip.mcapi.commands.ApiCredentialsCommand;
 import pl.sadboifilip.mcapi.commands.ApiStartCommand;
 import pl.sadboifilip.mcapi.commands.ApiStopCommand;

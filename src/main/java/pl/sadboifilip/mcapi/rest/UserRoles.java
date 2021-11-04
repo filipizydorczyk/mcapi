@@ -1,14 +1,12 @@
 package pl.sadboifilip.mcapi.rest;
 
+import io.javalin.core.security.Role;
+import io.javalin.http.Context;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-
-import io.javalin.core.security.Role;
-import io.javalin.http.Context;
 import pl.sadboifilip.mcapi.db.TokenKeeper;
 
 public enum UserRoles implements Role {

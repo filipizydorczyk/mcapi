@@ -1,19 +1,19 @@
 package pl.sadboifilip.mcapi.rest.endpoints;
 
-import pl.sadboifilip.mcapi.rest.UserRoles;
-import pl.sadboifilip.mcapi.rest.responses.DefaultResponse;
-import pl.sadboifilip.mcapi.rest.responses.PlayerResponse;
-
-import static io.javalin.apibuilder.ApiBuilder.*;
+import static io.javalin.apibuilder.ApiBuilder.delete;
+import static io.javalin.apibuilder.ApiBuilder.get;
+import static io.javalin.apibuilder.ApiBuilder.post;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.BanList;
 import org.bukkit.scheduler.BukkitScheduler;
+import pl.sadboifilip.mcapi.rest.UserRoles;
+import pl.sadboifilip.mcapi.rest.responses.DefaultResponse;
+import pl.sadboifilip.mcapi.rest.responses.PlayerResponse;
 
 public class PlayersEndpointGroup extends BaseEndpointGroup {
 

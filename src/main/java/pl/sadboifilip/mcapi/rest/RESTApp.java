@@ -1,14 +1,13 @@
 package pl.sadboifilip.mcapi.rest;
 
+import static io.javalin.apibuilder.ApiBuilder.path;
+
 import io.javalin.Javalin;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import pl.sadboifilip.mcapi.ApplicationConfig;
 import pl.sadboifilip.mcapi.rest.endpoints.LogsEndpointGroup;
 import pl.sadboifilip.mcapi.rest.endpoints.PlayersEndpointGroup;
 import pl.sadboifilip.mcapi.rest.endpoints.WhitelistEndpointGroup;
-
-import static io.javalin.apibuilder.ApiBuilder.*;
-
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class RESTApp extends Javalin {
 

@@ -1,13 +1,12 @@
 package pl.sadboifilip.mcapi.rest.endpoints;
 
-import static io.javalin.apibuilder.ApiBuilder.*;
-
-import pl.sadboifilip.mcapi.rest.UserRoles;
-import pl.sadboifilip.mcapi.rest.responses.LogsResponse;
+import static io.javalin.apibuilder.ApiBuilder.get;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
+import pl.sadboifilip.mcapi.rest.UserRoles;
+import pl.sadboifilip.mcapi.rest.responses.LogsResponse;
 
 public class LogsEndpointGroup extends BaseEndpointGroup {
     private static final String LOGS_PATH = "/logs/latest.log";

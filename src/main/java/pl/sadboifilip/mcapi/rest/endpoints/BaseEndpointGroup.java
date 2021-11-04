@@ -1,8 +1,7 @@
 package pl.sadboifilip.mcapi.rest.endpoints;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import io.javalin.apibuilder.EndpointGroup;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import pl.sadboifilip.mcapi.App;
 import pl.sadboifilip.mcapi.ApplicationConfig;
 

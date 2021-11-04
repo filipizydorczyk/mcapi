@@ -4,7 +4,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import pl.sadboifilip.mcapi.ApplicationConfig;
 import pl.sadboifilip.mcapi.rest.SseClientService;
 

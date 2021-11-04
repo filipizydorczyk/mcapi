@@ -1,11 +1,10 @@
 package pl.sadboifilip.mcapi.commands;
 
+import io.javalin.Javalin;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import io.javalin.Javalin;
 import pl.sadboifilip.mcapi.ApplicationConfig;
 
 public class ApiStartCommand implements CommandExecutor {
