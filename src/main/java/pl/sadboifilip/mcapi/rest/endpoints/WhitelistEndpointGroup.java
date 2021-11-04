@@ -22,12 +22,8 @@ public class WhitelistEndpointGroup extends BaseEndpointGroup {
     public void addEndpoints() {
         get("/", context -> {
             if (this.app.getServer().hasWhitelist()) {
-                final List<PlayerResponse> list = this.app
-                        .getServer()
-                        .getWhitelistedPlayers()
-                        .stream()
-                        .map(pl -> new PlayerResponse(pl))
-                        .collect(Collectors.toList());
+                final List<PlayerResponse> list = this.app.getServer().getWhitelistedPlayers()
+                        .stream().map(pl -> new PlayerResponse(pl)).collect(Collectors.toList());
 
                 context.json(list);
             } else {
