@@ -17,7 +17,7 @@ public class TokenKeeper implements Serializable {
 
     public static final String TOKEN_KEEPER_FILE = "tokens.ser";
 
-    private static transient final long serialVersionUID = 1L;
+    private static final transient long serialVersionUID = 1L;
     private final HashMap<UUID, UUID> tokens = new HashMap<>();
 
     public static TokenKeeper getTokenKeeper() {
