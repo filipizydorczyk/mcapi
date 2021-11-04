@@ -4,7 +4,7 @@ import io.javalin.Javalin;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import pl.sadboifilip.mcapi.rest.RESTApp;
+import pl.sadboifilip.mcapi.rest.RestServiceApplication;
 import pl.sadboifilip.mcapi.rest.SseClientService;
 
 @Configuration
@@ -21,7 +21,7 @@ public class ApplicationConfig {
     @Bean
     public Javalin getJavalinApp() {
         if (ApplicationConfig.restApp == null) {
-            ApplicationConfig.restApp = new RESTApp();
+            ApplicationConfig.restApp = new RestServiceApplication();
         }
         return ApplicationConfig.restApp;
     }

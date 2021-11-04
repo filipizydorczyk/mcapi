@@ -9,12 +9,12 @@ import pl.sadboifilip.mcapi.rest.endpoints.LogsEndpointGroup;
 import pl.sadboifilip.mcapi.rest.endpoints.PlayersEndpointGroup;
 import pl.sadboifilip.mcapi.rest.endpoints.WhitelistEndpointGroup;
 
-public class RESTApp extends Javalin {
+public class RestServiceApplication extends Javalin {
 
     @Override
     public Javalin start(int port) {
         final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        Thread.currentThread().setContextClassLoader(RESTApp.class.getClassLoader());
+        Thread.currentThread().setContextClassLoader(RestServiceApplication.class.getClassLoader());
         super.start(port);
         Thread.currentThread().setContextClassLoader(classLoader);
 
