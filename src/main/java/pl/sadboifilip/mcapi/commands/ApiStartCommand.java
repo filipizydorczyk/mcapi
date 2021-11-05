@@ -16,8 +16,12 @@ public class ApiStartCommand implements CommandExecutor {
             port = Integer.parseInt(args[0]);
         }
 
-        final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-                ApplicationConfig.class);
+        if (!sender.isOp()) {
+            return false;
+        }
+
+        final AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(ApplicationConfig.class);
         try {
             context.getBean(Javalin.class).start(port);
         } finally {
