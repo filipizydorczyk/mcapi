@@ -1,8 +1,13 @@
 package pl.sadboifilip.mcapi.rest.responses;
 
+import lombok.Getter;
+
+
 public class DefaultResponse {
 
+    @Getter
     private boolean isError;
+    @Getter
     private String message;
 
     public DefaultResponse(boolean isError, String message) {
@@ -12,14 +17,6 @@ public class DefaultResponse {
 
     public DefaultResponse(String message) {
         this(false, message);
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public boolean isError() {
-        return isError;
     }
 
 }
