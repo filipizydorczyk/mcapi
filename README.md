@@ -56,6 +56,8 @@ I added config file for java [checkstyle](https://checkstyle.sourceforge.io/) - 
 checkstyle -c ./linter.xml ./**/*.java
 ```
 
+It's temporary solution one day it will be included as maven plugin.
+
 The only diffence between google config and this one is that javadoc comments are not required and Indentation is changed from 2 to 4.
 
 ## Why Docker

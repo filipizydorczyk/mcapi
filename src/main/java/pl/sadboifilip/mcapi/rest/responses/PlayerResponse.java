@@ -1,8 +1,8 @@
 package pl.sadboifilip.mcapi.rest.responses;
 
+import lombok.Getter;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import lombok.Getter;
 
 public class PlayerResponse {
 
